@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="oceanKiller:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/oceanKiller_jar</output-path>
-    <root id="archive" name="oceanKiller.jar">
-      <element id="module-output" name="oceanKiller" />
-    </root>
-  </artifact>
-</component>
