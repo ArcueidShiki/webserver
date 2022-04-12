@@ -6,6 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="v9" />
+        <module name="v8" />
         <module name="v7" />
         <module name="v6" />
         <module name="v4" />
