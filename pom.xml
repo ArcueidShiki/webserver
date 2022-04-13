@@ -17,6 +17,12 @@
         <module>v7</module>
         <module>v8</module>
         <module>v9</module>
+        <module>v10</module>
+        <module>v11</module>
+        <module>v12</module>
+        <module>v13</module>
+        <module>v13-beta</module>
+        <module>v14</module>
     </modules>
 
     <properties>

@@ -11,14 +11,13 @@ public class DispatcherServlet {
     private static File staticDir;
     static {
         try {
-            root = new File(            // root 代表编译后生成的target目录中的class目录
-                    // getResource 返回URL， toURI 返回URI   File的一个构造器 接收URI
-                    ClientHandler.class.getClassLoader().getResource(".").toURI()
-            );
+            // root 代表编译后生成的target目录中的class目录
+            // getResource 返回URL， toURI 返回URI   File的一个构造器 接收URI
+            root = new File(DispatcherServlet.class.getClassLoader().getResource(".").toURI());
+            staticDir = new File(root,"static");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        staticDir = new File(root,"static/");
             /*
             在static目录下定位index.html页面
              */

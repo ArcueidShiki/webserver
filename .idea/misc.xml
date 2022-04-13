@@ -8,6 +8,10 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/v1/pom.xml" />
+        <option value="$PROJECT_DIR$/v10/pom.xml" />
+        <option value="$PROJECT_DIR$/v5/pom.xml" />
+        <option value="$PROJECT_DIR$/v13-beta/pom.xml" />
       </list>
     </option>
   </component>
