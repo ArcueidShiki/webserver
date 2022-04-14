@@ -24,6 +24,7 @@
         <module>v13-beta</module>
         <module>v14</module>
         <module>v15</module>
+        <module>v16</module>
     </modules>
 
     <properties>

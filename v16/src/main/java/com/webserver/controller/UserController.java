@@ -16,6 +16,35 @@ public class UserController {
         userDir = new File("./users");
         if(!userDir.exists()) userDir.mkdirs();
     }
+    public void login(HttpServletRequest request,HttpServletResponse response){
+        String username = request.getParameters("username");
+        String password = request.getParameters("password");
+        File login_error = new File("webapps","/myweb/login_error.html");
+        if(username == null || password == null) {
+            response.setContentFile(login_error);
+            return;
+        }
+        File userFile = new File(userDir,username+".obj");
+        if(!userFile.exists()){
+            response.setContentFile(login_error);
+            return;
+        }
+        try(
+                FileInputStream fis = new FileInputStream(userFile);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                ){
+            User user = (User)ois.readObject();
+            // 用户名肯定存在且正确 只验证密码
+            if(!password.equals(user.getPassword())){
+                response.setContentFile(login_error);
+                return;
+            }
+            File file = new File("webapps","/myweb/login_success.html");
+            response.setContentFile(file);
+        }catch (IOException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
     public void reg(HttpServletRequest request, HttpServletResponse response){
         // 1.获取用户表单细腻些
         String username = request.getParameters("username");
