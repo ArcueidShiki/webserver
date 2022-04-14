@@ -17,11 +17,13 @@
         .title{
             width: 1000px;
             border: 1px solid rgba(226, 166, 166, 0.14);
+            align-content: center;
         }
-        .content{
+        textarea{
             height: 500px;
             width: 1000px;
             border: 1px solid rgba(226, 166, 166, 0.14);
+            resize: none;
         }
     </style>
 </head>
@@ -31,16 +33,23 @@
     <form action="/myweb/writeArticle">
         <table>
             <tr>
-                <td class="head" >文章题目：</td>
+                <td class="head" >文章题目</td>
                 <td>
-                    <input class="title" type="text" placeholder="请输入文章题目...">
+                    <input class="title" name="title" type="text" placeholder="请输入文章题目...">
+                </td>
+
+            </tr>
+            <tr>
+                <td class="head" >作&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp者</td>
+                <td>
+                    <input class="title" name="author" type="text" placeholder="请输入作者...">
                 </td>
 
             </tr>
             <tr>
                 <td class="head">文章内容</td>
                 <td>
-                    <input  class="content" type="text" placeholder="请输入文章内容...">
+                    <textarea name="body" placeholder="请输入文章内容..."></textarea>
                 </td>
             </tr>
             <tr>
