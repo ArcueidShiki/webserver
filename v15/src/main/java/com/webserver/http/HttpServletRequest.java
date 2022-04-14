@@ -71,6 +71,8 @@ public class HttpServletRequest {
                     parameters.put(para[0],para.length > 1? para[1]:null);
                 }
             }
+        }else{
+            requestURI = uri;
         }
         System.out.println("requestURI: "+requestURI);
         System.out.println("queryString: "+queryString);
@@ -137,7 +139,12 @@ public class HttpServletRequest {
      * 根据参数名获取对应的参数值
      * @return
      */
-    public String getQueryString(String name) {
+    public String getParameters(String name) {
         return parameters.get(name);
     }
+
+    public String getRequestURI() {
+        return requestURI;
+    }
+
 }
