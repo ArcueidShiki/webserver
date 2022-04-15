@@ -34,7 +34,7 @@ public class UserController {
         try(
                 FileInputStream fis = new FileInputStream(userFile);
                 ObjectInputStream ois = new ObjectInputStream(fis);
-        ){
+                ){
             User user = (User)ois.readObject();
             // 用户名肯定存在且正确 只验证密码
             if(!password.equals(user.getPassword())){
@@ -101,9 +101,9 @@ public class UserController {
         for(File userFile : subs){
             try( FileInputStream fis = new FileInputStream(userFile);
                  ObjectInputStream ois = new ObjectInputStream(fis);
-            ){
-                User user = (User)ois.readObject();
-                userList.add(user);
+                ){
+               User user = (User)ois.readObject();
+               userList.add(user);
             }catch (IOException | ClassNotFoundException e){
                 e.printStackTrace();
             }

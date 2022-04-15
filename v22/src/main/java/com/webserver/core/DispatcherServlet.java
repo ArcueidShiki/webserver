@@ -30,6 +30,9 @@ public class DispatcherServlet {
             System.out.println("开始处理动态页面显示所有用户列表！！！！！！！！！！！！");
             UserController controller = new UserController();
             controller.showAll(response);
+        }else if("/myweb/showAllArticle".equals(path)){
+            ArticleController controller = new ArticleController();
+            controller.showAll(response);
         }else{
             File file = new File("webapps",path);
             System.out.println("资源是否存在 : "+file.exists());
