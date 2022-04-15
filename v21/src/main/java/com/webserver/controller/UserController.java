@@ -114,7 +114,9 @@ public class UserController {
          * 将数据以字节数组的形式存储在 baos里 就不需要 在硬盘上生成html文件了
          * 用PrintWriter动态页面写出给Client
          */
-        PrintWriter pw = response.getWriter();
+        // 以输出本地File的形式
+        File file = new File("./users/userList.html");
+        PrintWriter pw = response.getWriter(file);
         pw.println("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -147,9 +149,8 @@ public class UserController {
          * 1. 【性能】：如果把html文件写入硬盘，这里效率和性能是很慢把。创建本地html的过程是无必要的
          * 2. 【并发】：而且 多线程状态下。在同一文件中写东西。并发不安全
          */
-//        pw.flush(); 不flush，方法结束，自动flush。
-        //设置响应头Content-Type
-        response.setContentType("text/html");
-
+        pw.flush();
+        //添加响应头Content-Type
+        response.setContentFile(file);
     }
 }

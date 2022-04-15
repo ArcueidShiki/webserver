@@ -12,10 +12,8 @@ public class HttpServletResponse {
     private Socket socket;
     private int statusCode = 200;
     private String statusReason = "OK";
-    // 响应正文文件
+
     private File contentFile;
-    // 响应正文数据 byte[] 形式
-    private byte[] contentData;
     //响应头
     private Map<String,String> headers = new HashMap<>();
     public HttpServletResponse(Socket socket) {
@@ -26,13 +24,11 @@ public class HttpServletResponse {
     该流是一个低级流，内部维护一个字节数组，通过这个流写出的数据，
     会全部存在在内部的字节数组中。
      */
-    // 线程之间不能共享 不能使用static
-    private  ByteArrayOutputStream baos;
+    private static ByteArrayOutputStream baos;
     /**
      * 发送响应包括：状态行+响应头+响应正文
      */
     public void response() throws IOException{
-        sendBefore();
         sendStatusLine();
         sendHeaders();
         //响应正文
@@ -64,20 +60,9 @@ public class HttpServletResponse {
         out.write(13); // CR
         out.write(10); // LF
     }
-
-    /**
-     * 需要对 正文进行判断是 一个文件还是一个byte[] 数据流
-     * @throws IOException
-     */
     public void sendContent() throws IOException {
-        OutputStream out = socket.getOutputStream();
-        /**
-         * 思考 byte[] 和 file 的响应正文 为什么要进行互斥 : 因为一问一答
-         * 动态数据优先级 > 静态数据 不允许出现两种正文
-         */
-        if(contentData != null){
-            out.write(contentData);
-        }else if (contentFile != null) {
+        if (contentFile != null) {
+            OutputStream out = socket.getOutputStream();
             //自动关闭流
             try(FileInputStream fis = new FileInputStream(contentFile)){
                 byte[] data = new byte[1024 * 10];
@@ -133,27 +118,16 @@ public class HttpServletResponse {
     }
 
     /**
-     * 发送前 baso.toByteArray() pw写出的内容 存在 内存中的 byte[]中
-     * 并添加Content-Length 响应头
-     */
-    public void sendBefore(){
-        /*
-           如果baos不为null，说明向该输出流写出了一组动态数据，
-           将动态数据作为正文内容，因此需要将该流中的字节数组获取
-         */
-        if (baos != null) contentData = baos.toByteArray();
-        //注意 这里不要添加 Content-Type : 因为无法判断这里的 type类型 要在上层调用的类根据具体情况规定type
-        //自动添加响应头Content-Length
-        /*这个if 是确保 不通过baos 设置byte[] 数据 到contentData，有其他byte[]数据在contentData里*/
-        if(contentData != null) addHeaders("Content-Length",String.valueOf(contentData.length));
-    }
-
-    /**
      * 返回pw对象 向Client写出动态页面
      * @return
      */
-    public PrintWriter getWriter() {
-        OutputStream os = getOutputStream();
+    public PrintWriter getWriter(File file ) {
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         OutputStreamWriter osw = new OutputStreamWriter(os,StandardCharsets.UTF_8);
         BufferedWriter bw = new BufferedWriter(osw);
         PrintWriter pw = new PrintWriter(bw,true);
@@ -161,7 +135,7 @@ public class HttpServletResponse {
     }
 
     /**
-     * 通过返回的字节输出流写出的【字节数组】， 当作响应正文发送给客户端，全局只用一份
+     * 通过返回的字节输出流写出的【字节数组】， 当作响应正文发送给客户端，pw只用一份
      * @return
      */
     private OutputStream getOutputStream() {
@@ -169,8 +143,5 @@ public class HttpServletResponse {
             baos = new ByteArrayOutputStream();
         }
         return baos;
-    }
-    public void setContentType(String mime){
-        addHeaders("Content-Type",mime);
     }
 }

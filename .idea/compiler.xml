@@ -26,6 +26,7 @@
         <module name="v11" />
         <module name="v4" />
         <module name="v5" />
+        <module name="v21" />
         <module name="v20" />
       </profile>
     </annotationProcessing>
