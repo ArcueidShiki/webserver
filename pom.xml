@@ -31,6 +31,7 @@
         <module>v20</module>
         <module>v21</module>
         <module>v22</module>
+        <module>v23</module>
     </modules>
 
     <properties>

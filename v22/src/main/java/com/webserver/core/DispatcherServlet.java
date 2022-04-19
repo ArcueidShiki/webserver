@@ -1,6 +1,7 @@
 package com.webserver.core;
 
 import com.webserver.controller.ArticleController;
+import com.webserver.controller.ToolsController;
 import com.webserver.controller.UserController;
 import com.webserver.entity.User;
 import com.webserver.http.HttpServletRequest;
@@ -33,6 +34,9 @@ public class DispatcherServlet {
         }else if("/myweb/showAllArticle".equals(path)){
             ArticleController controller = new ArticleController();
             controller.showAll(response);
+        }else if("/myweb/createQR".equals(path)){
+            ToolsController controller =new ToolsController();
+            controller.createQR(request,response);
         }else{
             File file = new File("webapps",path);
             System.out.println("资源是否存在 : "+file.exists());

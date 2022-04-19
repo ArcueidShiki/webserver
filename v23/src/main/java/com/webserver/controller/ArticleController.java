@@ -1,5 +1,7 @@
 package com.webserver.controller;
 
+import com.webserver.annotation.Controller;
+import com.webserver.annotation.RequestMapping;
 import com.webserver.entity.Article;
 import com.webserver.http.HttpServletRequest;
 import com.webserver.http.HttpServletResponse;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Controller
 public class ArticleController {
     private static File articleDir;
     private static Map<String,Integer> map = new HashMap<>();
@@ -34,6 +36,7 @@ public class ArticleController {
     /**
      * 处理发表文章的方法
      */
+    @RequestMapping("/myweb/writeArticle")
     public void writeArticle(HttpServletRequest request, HttpServletResponse response){
         String title = request.getParameters("title");
         String author = request.getParameters("author");
@@ -73,7 +76,8 @@ public class ArticleController {
     /**
      * 展示所有文章 title 作者
      */
-    public void showAll(HttpServletResponse response) {
+    @RequestMapping("/myweb/showAllArticle")
+    public void showAll(HttpServletRequest request,HttpServletResponse response) {
         List<Article> articleList = new ArrayList<>();
         File[] subs = articleDir.listFiles(f->f.getName().endsWith(".obj"));
         for(File file :subs){
