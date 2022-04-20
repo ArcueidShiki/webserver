@@ -101,19 +101,7 @@ public class UserController {
      */
     @RequestMapping("/myweb/showAllUser")
     public void showAll(HttpServletRequest request,HttpServletResponse response) {
-        List<User> userList = new ArrayList<>();
-        // 可能会有隐藏文件。需要过滤
-        File[] subs = userDir.listFiles(f->f.getName().endsWith(".obj"));
-        for(File userFile : subs){
-            try( FileInputStream fis = new FileInputStream(userFile);
-                 ObjectInputStream ois = new ObjectInputStream(fis);
-                ){
-               User user = (User)ois.readObject();
-               userList.add(user);
-            }catch (IOException | ClassNotFoundException e){
-                e.printStackTrace();
-            }
-        }
+        List<User> userList = getUsersList();
         userList.forEach(System.err::println);
         /**
          * Java 中所有的对象都在内存里。 ByteArrayOutputStream
@@ -136,6 +124,7 @@ public class UserController {
                 "<td>密码</td>\n" +
                 "<td>昵称</td>\n" +
                 "<td>年龄</td>\n" +
+                "<td>操作</td>\n"+
                 "</tr>");
         for (User u : userList) {
             pw.println("<tr>");
@@ -143,6 +132,7 @@ public class UserController {
             pw.println("<td>" + u.getPassword() + "</td>");
             pw.println("<td>" + u.getNickname() + "</td>");
             pw.println("<td>" + u.getAge() + "</td>");
+            pw.println("<td><a href = '/myweb/deleteUser?username="+u.getUsername()+"'>删除</a></td>");
             pw.println("</tr>");
         }
         pw.println("</table>\n" +
@@ -156,5 +146,36 @@ public class UserController {
 //        pw.flush();
         //添加响应头Content-Type
         response.setContentType("text/html");
+    }
+
+    public List<User> getUsersList() {
+        List<User> userList = new ArrayList<>();
+        // 可能会有隐藏文件。需要过滤
+        File[] subs = userDir.listFiles(f->f.getName().endsWith(".obj"));
+        for(File userFile : subs){
+            try(FileInputStream fis = new FileInputStream(userFile);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                ){
+               User user = (User)ois.readObject();
+               userList.add(user);
+            }catch (IOException | ClassNotFoundException e){
+                e.printStackTrace();
+            }
+        }
+        return userList;
+    }
+
+    @RequestMapping("/myweb/deleteUser")
+    public void deleteUser(HttpServletRequest request,HttpServletResponse response){
+        System.err.println("开始处理删除用户！！！");
+
+        String username = request.getParameters("username");
+        File UserFile = new File(userDir,username+".obj");
+        UserFile.delete();
+
+        //删除之后重定向
+        File file = new File("webapps","myweb/deleteUserSuccess.html");
+        response.setContentFile(file);
+
     }
 }

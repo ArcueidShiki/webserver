@@ -46,6 +46,7 @@ public class DispatcherServlet {
                                 method.getAnnotation(RequestMapping.class).value().equals(path)){
                             method.invoke(obj,request,response);
                             System.err.println("method has invoked");
+                            return;
                          }
                     }
 
