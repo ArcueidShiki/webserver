@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table{
+            border: 0.5px solid goldenrod;
+        }
+        .head{
+            font-weight: bold;
+            color: #d43f3a;
+            text-shadow: #a94442;
+            border: 2px dashed rgba(249, 175, 175, 0.29);
+            background-color: rgba(189, 222, 243, 0.21);
+        }
+        .title{
+            width: 1000px;
+            border: 1px solid rgba(226, 166, 166, 0.14);
+            align-content: center;
+        }
+        textarea{
+            height: 500px;
+            width: 1000px;
+            border: 1px solid rgba(226, 166, 166, 0.14);
+            resize: none;
+        }
+    </style>
+</head>
+<body background="/myweb/img2352.png" style="background-repeat: repeat">
+<center>
+    <h1 style="color: #5bc0de">✍ 发 表 文 章 📃</h1>
+    <form action="/myweb/writeArticle">
+        <table>
+            <tr>
+                <td class="head" >文章题目</td>
+                <td>
+                    <input class="title" name="title" type="text" placeholder="请输入文章题目...">
+                </td>
+
+            </tr>
+            <tr>
+                <td class="head" >作&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp者</td>
+                <td>
+                    <input class="title" name="author" type="text" placeholder="请输入作者...">
+                </td>
+
+            </tr>
+            <tr>
+                <td class="head">文章内容</td>
+                <td>
+                    <textarea name="body" placeholder="请输入文章内容..."></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="发布文章✅" style="font-weight: bold; color: #d43f3a;font-size: large">
+                </td>
+            </tr>
+        </table>
+    </form>
+</center>
+</body>
+</html>

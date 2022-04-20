@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <style>
+        td.nav{
+          text-align: right;
+        }
+        input{
+            background-color: rgba(165, 244, 210, 0.35);
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>用户注册</h1>
+        <div>
+            <form action = "/myweb/reg" method = "post">
+                <table border="1px" style="background-color: rgba(183,235,237,0.44)">
+            <tr >
+                <td class="nav">
+                    用户名 :
+                </td>
+                <td>
+                    <input type="text" name ="username" size="32">
+                </td>
+            </tr>
+            <tr >
+                <td class="nav">密码  :</td>
+                <td>
+                    <input type="password" name="password" size="32">
+                </td>
+            </tr>
+            <tr>
+                <td class="nav">
+                    昵称 :
+                </td>
+                <td>
+                    <input type="text" name="nickname" size="32">
+                </td>
+            </tr>
+            <tr>
+                <td class="nav">
+                    年龄 :
+                </td>
+                <td>
+                    <input type="text" name="age" size="32">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="注册" style="color: #a94442">
+                </td>
+            </tr>
+        </table>
+        </form>
+        </div>
+    </center>
+
+</body>
+</html>
