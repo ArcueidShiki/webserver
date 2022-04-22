@@ -5,10 +5,12 @@
     <title>用户注册</title>
     <style>
         td.nav{
-          text-align: right;
+            text-align: right;
+            width: 72px;
         }
         input{
             background-color: rgba(165, 244, 210, 0.35);
+            height: 35px;
         }
     </style>
 </head>
@@ -46,6 +48,15 @@
                 </td>
                 <td>
                     <input type="text" name="age" size="32">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!--dispatcher去拦截这个请求，反射到controller生成这个jpg-->
+                    <img src="/myweb/random.jpg">
+                </td>
+                <td>
+                    <input type="text" name="code" size="32">
                 </td>
             </tr>
             <tr>

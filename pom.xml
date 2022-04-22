@@ -33,6 +33,8 @@
         <module>v22</module>
         <module>v23</module>
         <module>v24</module>
+        <module>v25</module>
+        <module>v26</module>
     </modules>
 
     <properties>

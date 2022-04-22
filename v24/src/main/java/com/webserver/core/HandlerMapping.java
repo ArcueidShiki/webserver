@@ -24,7 +24,9 @@ public class HandlerMapping {
     public static Method getMethod(String path){
         return mapping.get(path).getMethod();
     }
-
+    public static boolean contains(String path){
+        return mapping.containsKey(path);
+    }
     static{
         initMapping();
         System.err.println(mapping);

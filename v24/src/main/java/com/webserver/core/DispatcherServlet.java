@@ -1,19 +1,12 @@
 package com.webserver.core;
 
-import com.webserver.annotation.Controller;
-import com.webserver.annotation.RequestMapping;
-import com.webserver.controller.ArticleController;
-import com.webserver.controller.ToolsController;
-import com.webserver.controller.UserController;
-import com.webserver.entity.User;
+
 import com.webserver.http.HttpServletRequest;
 import com.webserver.http.HttpServletResponse;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.URISyntaxException;
 
 public class DispatcherServlet {
 
@@ -22,7 +15,7 @@ public class DispatcherServlet {
         String path = request.getRequestURI();
         System.err.println(path);
 
-        if(HandlerMapping.getController(path) != null){
+        if(HandlerMapping.contains(path)){
             Object obj = HandlerMapping.getController(path);
             Method method = HandlerMapping.getMethod(path);
             try {
